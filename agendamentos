@@ -1,0 +1,162 @@
+CENTROS = [
+    "Serviço de Hematologia e Hemoterapia - SJC",
+    "Serviço de Hematologia e Hemoterapia - Jacareí",
+    "Banco de Sangue São Paulo"
+    ]
+'''
+Horários: 7h, 8h, 9h
+'''
+horarios1 = [False,False,False]
+horarios2 = [False,False,False]
+horarios3 = [False,False,False]
+
+agendamentos = []
+
+def conta_horarios(lista_horarios):
+    count = 0
+    for i in range(len(lista_horarios)):
+        if lista_horarios[i] == True:
+            count += 1
+    if count == 3:
+        return False
+    else:
+        return True
+
+def menu():
+    while True:
+
+        centro_num = -1
+        while centro_num < 1 or centro_num > 3:
+            print(f'''Em qual centro de coleta será realizado o agendamento?
+                  1 - {CENTROS[0]}
+                  2 - {CENTROS[1]}
+                  3 - {CENTROS[2]}      ''')
+            centro_num = int(input())
+
+        if centro_num == 1:
+            verificador = conta_horarios(horarios1)
+            if verificador == False:
+                print("Todos os horários já estão preenchidos neste centro, escolha outro, por gentileza.")
+            else:
+                centro = CENTROS[0]
+        elif centro_num == 2:
+            verificador = conta_horarios(horarios2)
+            if verificador == False:
+                print("Todos os horários já estão preenchidos neste centro, escolha outro, por gentileza.")
+            else:
+                centro = CENTROS[1]
+        else:
+            verificador = conta_horarios(horarios3)
+            if verificador == False:
+                print("Todos os horários já estão preenchidos neste centro, escolha outro, por gentileza.")
+            else:
+                centro = CENTROS[2]
+
+        horario = -1
+        while horario < 1 or horario > 3:
+            print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 7h
+                  2 - 8h
+                  3 - 9h            ''')
+            horario = int(input())
+
+        if horario == 1:
+            if horarios1[0] == True:
+                print("Horário já com agendamentos, escolha outro horário.\n")
+                print(f'''Em qual horário gostaria de realizar o agendamento?
+                  2 - 8h
+                  3 - 9h            ''')
+            else:
+                horarios1[0] = True
+                agendamentos.append([centro,"7h"])
+                
+            if horarios1[1] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 8h
+                  3 - 9h            ''')
+            else:
+                horarios1[1] = True
+                agendamentos.append([centro,"7h"])
+                
+            if horarios1[2] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 8h
+                  2 - 9h            ''')
+            else:
+                    horarios1[2] = True
+                    agendamentos.append([centro,"7h"])
+
+        elif horario == 2:
+            if horarios2[0] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  2 - 7h
+                  3 - 9h            ''')
+            else:
+                horarios2[0] = True
+                agendamentos.append([centro,"8h"])
+                
+            if horarios2[1] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 7h
+                  3 - 9h            ''')
+            else:
+                horarios2[1] = True
+                agendamentos.append([centro,"8h"])
+                
+            if horarios2[2] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 7h
+                  2 - 9h            ''')
+            else:
+                horarios2[2] = True
+                agendamentos.append([centro,"8h"])
+
+        else:
+            if horarios3[0] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  2 - 8h
+                  3 - 9h            ''')
+            else:
+                horarios3[0] = True
+                agendamentos.append([centro,"9h"])
+                
+            if horarios3[1] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 8h
+                  3 - 9h            ''')
+            else:
+                horarios3[1] = True
+                agendamentos.append([centro,"9h"])
+                
+            if horarios3[2] == True:
+                    print("Horário já com agendamentos, escolha outro horário.\n")
+                    print(f'''Em qual horário gostaria de realizar o agendamento?
+                  1 - 8h
+                  2 - 9h            ''')
+            else:
+                horarios3[2] = True
+                agendamentos.append([centro,"9h"])
+            
+
+        confirmacao = True
+        continuar = "nada"
+        while continuar not in ["sim","s","nao","n"]:
+            continuar = input("Gostaria de realizar um novo agendamento? Responda com 'sim' ou 'nao'.\n").lower()
+            if continuar == "sim" or continuar == "s":
+                pass
+            elif continuar == "nao" or continuar == "n":
+                confirmacao = False
+            else:
+                print("Resposta inválida, responda com 'sim' ou 'nao'.")
+        if confirmacao == False:
+            break
+
+menu()
+print(agendamentos)
